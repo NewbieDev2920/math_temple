@@ -1,0 +1,10 @@
+[
+  {
+    "question": "Prove that $\\sqrt{2}$ is irrational.",
+    "answer": "Suppose $\\sqrt{2} = \\frac{p}{q}$ for coprime integers $p, q$. Then $2 = \\frac{p^2}{q^2}$, so $2q^2 = p^2$. This means $p^2$ is even, so $p$ is even. Let $p = 2k$. Then $2q^2 = 4k^2 \\implies q^2 = 2k^2$. Thus $q$ is also even, contradicting that $p$ and $q$ are coprime."
+  },
+  {
+    "question": "Prove that there are infinitely many primes.",
+    "answer": "Suppose there are finitely many primes $p_1, p_2, \\dots, p_k$. Consider the number $N = p_1p_2\\cdots p_k + 1$. $N$ leaves a remainder of $1$ when divided by any $p_i$, so it is not divisible by any of them. Thus $N$ is either prime or has a prime factor not in the list, arriving at a contradiction."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "question": "Evaluate the integral: $\\int_{0}^{1} x e^x \\, dx$",
+    "answer": "Using integration by parts: \nLet $u = x$, $dv = e^x \\, dx$. Then $du = dx$, $v = e^x$.\n\n$$\n\\int_{0}^{1} x e^x \\, dx = [x e^x]_0^1 - \\int_{0}^{1} e^x \\, dx\n$$\n\n$$\n= (e - 0) - [e^x]_0^1 = e - (e - 1) = 1\n$$"
+  },
+  {
+    "question": "Write a Python script that computes the $n$-th Fibonacci number using memoization.",
+    "answer": "```python\ndef fib(n, memo={}):\n    if n in memo:\n        return memo[n]\n    if n <= 1:\n        return n\n    memo[n] = fib(n-1, memo) + fib(n-2, memo)\n    return memo[n]\n\nprint(fib(10)) # Example usage\n```"
+  },
+  {
+    "question": "Compute the determinant of the matrix $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$.",
+    "answer": "The determinant of a $2 \\times 2$ matrix is given by $ad - bc$. Hence:\n\n$$\n\\det(A) = (1)(4) - (2)(3) = 4 - 6 = -2\n$$"
+  }
+]

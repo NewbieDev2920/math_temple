@@ -1,0 +1,50 @@
+/* Apply Computer Modern font */
+@font-face {
+    font-family: 'Computer Modern Serif';
+    src: url('https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts/cmunrm.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Computer Modern Serif';
+    src: url('https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts/cmunbx.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Computer Modern Serif';
+    src: url('https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts/cmunti.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+body {
+    font-family: 'Computer Modern Serif', 'Times New Roman', Times, serif;
+}
+
+/* Base textbook-style justification */
+.question-content p, .answer-content p {
+    text-align: justify;
+    margin-bottom: 1rem;
+}
+
+.question-content p:last-child, .answer-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Centered math blocks */
+mjx-container[display="true"] {
+    margin: 1.5em 0 !important;
+}
+
+/* Beautiful code blocks constraints */
+pre[class*="language-"] {
+    background: #111 !important;
+    border: 1px solid #333 !important;
+    border-radius: 4px;
+    margin: 1.5em 0 !important;
+}
+
+code {
+    font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+}

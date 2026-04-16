@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Temple</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <!-- MathJax for LaTeX rendering -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Prism.js for code highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</head>
+<body class="bg-black text-white font-serif min-h-screen flex flex-col items-center py-10 px-4">
+    
+    <div class="max-w-4xl w-full flex flex-col gap-10">
+        
+        <!-- Header Section -->
+        <header class="text-center flex flex-col gap-2">
+            <h1 class="text-5xl font-bold tracking-widest uppercase">Math Temple</h1>
+            <p class="text-xl italic text-gray-400">A daily sanctuary for mathematical thought</p>
+        </header>
+        
+        <!-- Quote Section -->
+        <section class="border-l-4 border-gray-600 pl-6 py-2 my-6">
+            <blockquote class="text-2xl italic leading-relaxed">
+                "{{ selection.quote.quote }}"
+            </blockquote>
+            <p class="text-right mt-4 text-lg text-gray-400">— {{ selection.quote.author }}</p>
+        </section>
+
+        <!-- Exercises -->
+        {% for key, q in selection.items() %}
+        {% if key != 'quote' %}
+        <section class="exercise-card flex flex-col gap-4">
+            <h2 class="text-3xl font-semibold border-b border-gray-800 pb-2 text-gray-200">
+                {{ q.type }}
+            </h2>
+            
+            <div class="text-lg leading-relaxed question-content">
+                {{ q.question }}
+            </div>
+
+            <button onclick="toggleAnswer('ans-{{ key }}', this)" 
+                    class="mt-4 self-start bg-gray-800 hover:bg-gray-700 text-white py-2 px-6 rounded transition-colors duration-200 ease-in-out border border-gray-600 font-sans tracking-wide">
+                Show Answer
+            </button>
+            
+            <div id="ans-{{ key }}" class="hidden mt-4 p-6 bg-gray-900 rounded border border-gray-800 flex flex-col gap-4">
+                <div class="text-lg leading-relaxed answer-content">
+                    {{ q.answer }}
+                </div>
+                {% if q.image %}
+                <div class="flex justify-center mt-4">
+                    <img src="{{ url_for('static', filename=q.image) }}" alt="Answer Image" class="max-w-full h-auto rounded border border-gray-700">
+                </div>
+                {% endif %}
+            </div>
+        </section>
+        {% endif %}
+        {% endfor %}
+        
+    </div>
+
+    <!-- Client-side Rendering Script -->
+    <script>
+        function toggleAnswer(id, btn) {
+            const el = document.getElementById(id);
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                btn.textContent = 'Hide Answer';
+                // Trigger MathJax typesetting if it hasn't been rendered yet
+                MathJax.typesetPromise([el]).catch(function (err) {
+                    console.log('MathJax error: ', err.message);
+                });
+            } else {
+                el.classList.add('hidden');
+                btn.textContent = 'Show Answer';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Setup Marked
+            marked.setOptions({
+                highlight: function(code, lang) {
+                    if (Prism.languages[lang]) {
+                        return Prism.highlight(code, Prism.languages[lang], lang);
+                    } else {
+                        return code;
+                    }
+                }
+            });
+
+            document.querySelectorAll('.question-content, .answer-content').forEach(el => {
+                const raw = el.innerHTML.trim();
+                // Decode HTML entities
+                const decoder = document.createElement('textarea');
+                decoder.innerHTML = raw;
+                let unescaped = decoder.value;
+                
+                // Parse markdown
+                const parsed = marked.parse(unescaped);
+                el.innerHTML = parsed;
+            });
+            
+            // Highlight all code blocks that might have been processed by marked
+            Prism.highlightAll();
+
+            // Typeset MathJax
+            MathJax.typesetPromise().catch(function (err) {
+                console.log('MathJax error: ', err.message);
+            });
+        });
+    </script>
+</body>
+</html>

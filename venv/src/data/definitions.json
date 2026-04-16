@@ -1,0 +1,14 @@
+[
+  {
+    "question": "What is the definition of a limit of a sequence $(x_n)$?",
+    "answer": "A sequence $(x_n)$ converges to a limit $L$ if for every $\\epsilon > 0$, there exists an integer $N$ such that $|x_n - L| < \\epsilon$ for all $n \\ge N$."
+  },
+  {
+    "question": "Define what it means for a function $f: \\mathbb{R} \\to \\mathbb{R}$ to be continuous at a point $c$.",
+    "answer": "A function $f$ is continuous at $c$ if for every $\\epsilon > 0$, there exists a $\\delta > 0$ such that for all $x \\in \\mathbb{R}$, $|x - c| < \\delta$ implies $|f(x) - f(c)| < \\epsilon$."
+  },
+  {
+    "question": "What is the definition of a basis for a vector space $V$?",
+    "answer": "A set of vectors $B = \\{v_1, v_2, \\dots, v_n\\}$ forms a basis for $V$ if they are linearly independent and span $V$."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "question": "State the Bolzano-Weierstrass Theorem for sequences in $\\mathbb{R}$.",
+    "answer": "Every bounded sequence in $\\mathbb{R}$ has a convergent subsequence."
+  },
+  {
+    "question": "State the Rank-Nullity Theorem for a linear map $T: V \\to W$.",
+    "answer": "If $V$ is a finite-dimensional vector space, then $\\dim(V) = \\dim(\\operatorname{ker}(T)) + \\dim(\\operatorname{im}(T))$."
+  },
+  {
+    "question": "State the Fundamental Theorem of Calculus (Part 1).",
+    "answer": "If $f$ is continuous on $[a, b]$, then the function $F$ defined by $F(x) = \\int_a^x f(t)\\,dt$ is continuous on $[a, b]$ and differentiable on $(a, b)$, and $F'(x) = f(x)$."
+  }
+]
